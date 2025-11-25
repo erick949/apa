@@ -1,55 +1,73 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8" />
-    <title>Gestión de Preguntas</title>
-    <link rel="stylesheet" href="/static/style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Preguntas - Futurista</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
-    <div class="app-wrapper">
-        <div class="container">
-            <header class="topbar">
-                <h1>Gestión de Preguntas</h1>
-                <div class="controls">
-                    <button id="openAddBtn" class="primary">+ Nueva pregunta</button>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <h1>
+                <i class="fas fa-brain"></i>
+                Gestión de Preguntas
+            </h1>
+            <button id="openAddBtn" class="btn btn-primary">
+                <i class="fas fa-plus"></i>
+                Nueva Pregunta
+            </button>
+        </header>
+
+        <!-- Main content -->
+        <main id="mainContent">
+            <div id="preguntas-container" class="preguntas-grid">
+                <div class="loading">
+                    <i class="fas fa-spinner"></i>
+                    <p>Cargando preguntas...</p>
                 </div>
-            </header>
-
-            <section id="mainContent" class="main-content">
-                <hr class="divider">
-
-                <h2>Lista de Preguntas</h2>
-                <div id="preguntas-container" class="preguntas-list"></div>
-            </section>
-        </div>
+            </div>
+        </main>
     </div>
 
-    <!-- Modal para agregar/editar -->
-    <div id="modalOverlay" class="modal-overlay hidden">
+    <!-- Modal -->
+    <div id="modalOverlay" class="modal-overlay">
         <div class="modal">
-            <h3 id="modalTitle">Crear pregunta</h3>
+            <h3 id="modalTitle">
+                <i class="fas fa-edit"></i>
+                Crear Pregunta
+            </h3>
 
-            <label class="label">Pregunta</label>
-            <input id="formPregunta" type="text" placeholder="Escribe la pregunta">
-
-            <div class="label-row">
-                <label class="label">Opciones</label>
-                <button id="addOptionBtn" class="small">+ Añadir opción</button>
+            <div class="form-group">
+                <label class="form-label">Pregunta</label>
+                <input id="formPregunta" type="text" class="form-input" placeholder="Escribe tu pregunta aquí">
             </div>
 
-            <div id="optionsContainer" class="options-edit">
-                <!-- filas generadas dinámicamente: cada fila = [radio visual] [input opción] [btn eliminar] -->
+            <div class="form-group">
+                <div class="label-row">
+                    <label class="form-label">Opciones</label>
+                    <button id="addOptionBtn" class="btn btn-secondary btn-small">
+                        <i class="fas fa-plus"></i>
+                        Añadir
+                    </button>
+                </div>
+                <div id="optionsContainer" class="options-editor"></div>
             </div>
 
             <div class="modal-actions">
-                <button id="cancelBtn" class="secondary">Cancelar</button>
-                <button id="saveBtn" class="primary" disabled>Crear</button>
+                <button id="cancelBtn" class="btn btn-secondary">
+                    <i class="fas fa-times"></i>
+                    Cancelar
+                </button>
+                <button id="saveBtn" class="btn btn-primary" disabled>
+                    <i class="fas fa-save"></i>
+                    <span id="saveBtnText">Crear</span>
+                </button>
             </div>
         </div>
     </div>
-
-    <!-- Overlay de bloqueo (blur + capa) -->
-    <div id="blockOverlay" class="block-overlay hidden"></div>
 
     <script src="/static/script.js"></script>
 </body>
