@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <title>Gestión de Preguntas</title>
+    <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+    <div class="app-wrapper">
+        <div class="container">
+            <header class="topbar">
+                <h1>Gestión de Preguntas</h1>
+                <div class="controls">
+                    <button id="openAddBtn" class="primary">+ Nueva pregunta</button>
+                </div>
+            </header>
+
+            <section id="mainContent" class="main-content">
+                <hr class="divider">
+
+                <h2>Lista de Preguntas</h2>
+                <div id="preguntas-container" class="preguntas-list"></div>
+            </section>
+        </div>
+    </div>
+
+    <!-- Modal para agregar/editar -->
+    <div id="modalOverlay" class="modal-overlay hidden">
+        <div class="modal">
+            <h3 id="modalTitle">Crear pregunta</h3>
+
+            <label class="label">Pregunta</label>
+            <input id="formPregunta" type="text" placeholder="Escribe la pregunta">
+
+            <div class="label-row">
+                <label class="label">Opciones</label>
+                <button id="addOptionBtn" class="small">+ Añadir opción</button>
+            </div>
+
+            <div id="optionsContainer" class="options-edit">
+                <!-- filas generadas dinámicamente: cada fila = [radio visual] [input opción] [btn eliminar] -->
+            </div>
+
+            <div class="modal-actions">
+                <button id="cancelBtn" class="secondary">Cancelar</button>
+                <button id="saveBtn" class="primary" disabled>Crear</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Overlay de bloqueo (blur + capa) -->
+    <div id="blockOverlay" class="block-overlay hidden"></div>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>
