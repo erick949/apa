@@ -22,7 +22,7 @@ function isFormValid() {
     const pregunta = formPregunta.value.trim();
     if (!pregunta) return false;
     const inputs = optionsContainer.querySelectorAll('.option-row .option-text input');
-    if (inputs.length < 2) return false;
+    if (inputs.length !== 4) return false;
     for (const inp of inputs) if (!inp.value.trim()) return false;
     const anyChecked = optionsContainer.querySelector('.option-row input[type="radio"]:checked');
     if (!anyChecked) return false;
@@ -31,6 +31,8 @@ function isFormValid() {
 
 function refreshSaveButton() {
     saveBtn.disabled = !isFormValid();
+    const totalOptions = optionsContainer.querySelectorAll('.option-row').length;
+    addOptionBtn.disabled = totalOptions >= 4;
 }
 
 function escapeHtml(s) {
@@ -175,6 +177,7 @@ function closeModal() {
 // ---------- AGREGAR OPCIÓN ----------
 
 function addOptionRow(text) {
+    console.log("añadiendo opcion");
     const id = 'opt_' + uid();
     const row = document.createElement('div');
     row.className = 'option-row';
@@ -225,6 +228,11 @@ openAddBtn.addEventListener('click', startCreate);
 
 addOptionBtn.addEventListener('click', (e) => {
     e.preventDefault();
+    const totalOptions = optionsContainer.querySelectorAll('.option-row').length;
+    if (totalOptions >= 4) {
+        alert('No puedes agregar más de 4 opciones.');
+        return;
+    }
     addOptionRow('');
     refreshSaveButton();
 });
@@ -244,6 +252,13 @@ modalOverlay.addEventListener('click', (e) => {
 // Guardar / Crear
 saveBtn.addEventListener('click', async (e) => {
     e.preventDefault();
+    
+    const totalOptions = optionsContainer.querySelectorAll('.option-row').length;
+    if (totalOptions !== 4) {
+        alert('Debes tener exactamente 4 opciones para guardar la pregunta.');
+        return;
+    }
+    
     if (!isFormValid()) {
         alert('Completa todos los campos antes de continuar.');
         return;
